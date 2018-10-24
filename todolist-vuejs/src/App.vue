@@ -2,24 +2,29 @@
   <div id="app">
     <h1 v-text="title"></h1>
     <input v-model="newItem" v-on:keyup.enter="addNew()"></input>
-    <button v-on:click="deleteStorage"/>
-   <ul>
+    <button v-on:click="deleteStorage">Delete</button>
+   <ol>
    <li v-for="item in items" v-bind:class={Finished:item.isFinished}
     v-on:click="toggleFinished(item)">{{item.label}}</li>
-   </ul>
+   </ol>
+   <p>child tells me:{{childWords}}</p>
+   <ComponentA msgFromFather="six" v-on:child-tell-father="tellfather"></ComponentA>
   </div>
 </template>
 
 <script>
 import Store from './store.js'
+import ComponentA from "./components/ComponentA"
 export default {
   data(){
     return{
       title:'this is a to-do list',
       items:Store.fetch(),
-      newItem:''
+      newItem:'',
+      childWords:'',
     }
   },
+  components:{ComponentA},
   methods:{
     toggleFinished:function(item){
       item.isFinished=!item.isFinished;
@@ -35,6 +40,9 @@ isFinished:false
     deleteStorage:function(){
       Store.delete();
       this.items=[];
+    },
+    tellfather:function(msg){
+      this.childWords=msg;
     }
   },
   watch:{
@@ -44,6 +52,11 @@ isFinished:false
          },
          deep:true
      }
+  },
+  events:{
+    'child-tell-father':function(msg){
+      this.childWords=msg;
+    }
   }
 }
 </script>
@@ -63,6 +76,7 @@ text-decoration:underline;
 }
 
 button {
- 
+ color:red;
+ background-color:pink;
 }
 </style>
