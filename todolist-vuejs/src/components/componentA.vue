@@ -16,7 +16,7 @@ export default {
     props:["msgFromFather"],
     methods:{
         ClickA:function(){
-            this.$dispatch("child-tell-father",this.msg);
+            this.msgFromFather=this.msg;
         }
     },
 }

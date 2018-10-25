@@ -8,13 +8,15 @@
     v-on:click="toggleFinished(item)">{{item.label}}</li>
    </ol>
    <p>child tells me:{{childWords}}</p>
-   <ComponentA msgFromFather="six" v-on:child-tell-father="tellfather"></ComponentA>
+   <ComponentA msgFromFather="six"></ComponentA>
+   <HelloWorld></HelloWorld>
   </div>
 </template>
 
 <script>
 import Store from './store.js'
 import ComponentA from "./components/ComponentA"
+import HelloWorld from "./components/HelloWorld"
 export default {
   data(){
     return{
@@ -24,7 +26,7 @@ export default {
       childWords:'',
     }
   },
-  components:{ComponentA},
+  components:{ComponentA,HelloWorld},
   methods:{
     toggleFinished:function(item){
       item.isFinished=!item.isFinished;
@@ -52,11 +54,6 @@ isFinished:false
          },
          deep:true
      }
-  },
-  events:{
-    'child-tell-father':function(msg){
-      this.childWords=msg;
-    }
   }
 }
 </script>
