@@ -4,11 +4,11 @@
     <input v-model="newItem" v-on:keyup.enter="addNew()" />
     <button v-on:click="deleteStorage">Delete</button>
    <ol>
-   <li v-for="item in items" v-bind:class={Finished:item.isFinished} v-on:click="toggleFinished(item)" track-by="$index">{{item.label}}</li>
+   <li v-for="item in items" v-bind:class={Finished:item.isFinished} v-on:click="toggleFinished(item)" v-bind:key="item">{{item.label}}</li>
    </ol>
    <p>child tells me:{{childWords}}</p>
    <ComponentA msgFromFather="six"></ComponentA>
-   <HelloWorld></HelloWorld>
+   <HelloWorld></HelloWorld>8
   </div>
 </template>
 
