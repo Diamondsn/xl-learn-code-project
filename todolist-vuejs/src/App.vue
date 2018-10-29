@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <h1 v-text="title"></h1>
-    <input v-model="newItem" v-on:keyup.enter="addNew()"></input>
+    <input v-model="newItem" v-on:keyup.enter="addNew()" />
     <button v-on:click="deleteStorage">Delete</button>
    <ol>
-   <li v-for="item in items" v-bind:class={Finished:item.isFinished}
-    v-on:click="toggleFinished(item)">{{item.label}}</li>
+   <li v-for="item in items" v-bind:class={Finished:item.isFinished} v-on:click="toggleFinished(item)" track-by="$index">{{item.label}}</li>
    </ol>
    <p>child tells me:{{childWords}}</p>
    <ComponentA msgFromFather="six"></ComponentA>
