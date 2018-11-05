@@ -6,7 +6,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
   </head>
   <body>
-    <div id="app">{{msg}}</div>
+    <div id="app">
+        <div :title="'hello'+msg">hello world</div>
+        <input v-model="content"/>
+        <div>{{content}}</div>
+        <input v-model="firstName"/>
+        <input v-model="lastName"/>
+        <div>{{fullName}}</div>
+        <div>{{count}}</div>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
