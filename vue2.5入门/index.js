@@ -6,7 +6,8 @@ var app=new Vue({
         content:"this is content",
         firstName:"",
         lastName:"",
-        count:0
+        count:0,
+        show:true
     },
     computed:{
         fullName:function(){
@@ -22,6 +23,11 @@ var app=new Vue({
         // }
         fullName:function(){
             this.count++;
+        }
+    },
+    methods:{
+        taggle:function(){
+            this.show=!this.show;
         }
     }
 });

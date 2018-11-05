@@ -14,6 +14,9 @@
         <input v-model="lastName"/>
         <div>{{fullName}}</div>
         <div>{{count}}</div>
+        <div v-if="show">Hello</div>
+        <div v-show="show">world</div>
+        <button @click="taggle">taggle</button>
     </div>
     <script src="index.js"></script>
   </body>
