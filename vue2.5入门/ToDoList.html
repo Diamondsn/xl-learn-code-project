@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vuejs-learn</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+       <input v-model="content" @keydown.enter="submit"/>
+       <button @click="submit">提交</button>
+       <ul>
+           <li v-for="(item,index) of lists" :key="index">{{item}}</li>
+       </ul>
+    </div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            lists:[],
+            content:""
+        },
+        methods:{
+                submit:function(){
+                    if(this.content)
+                       this.lists.push(this.content);
+                    this.content="";
+                }
+        }
+    })
+    </script>
+  </body>
+</html>

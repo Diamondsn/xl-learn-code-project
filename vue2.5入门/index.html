@@ -17,6 +17,9 @@
         <div v-if="show">Hello</div>
         <div v-show="show">world</div>
         <button @click="taggle">taggle</button>
+        <ul>
+            <li v-for="(item,index) of list" :key="index">{{item}}</li>
+        </ul>
     </div>
     <script src="index.js"></script>
   </body>

@@ -7,7 +7,8 @@ var app=new Vue({
         firstName:"",
         lastName:"",
         count:0,
-        show:true
+        show:true,
+        list:[1,2,3]
     },
     computed:{
         fullName:function(){
