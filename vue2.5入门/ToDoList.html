@@ -10,12 +10,33 @@
        <input v-model="content" @keydown.enter="submit"/>
        <button @click="submit">提交</button>
        <ul>
-           <li v-for="(item,index) of lists" :key="index">{{item}}</li>
+           <todo-item v-for="(item,index) in lists" :key="index" :content="item" :index="index"
+           @delete="handleDelete"></todo-item>
        </ul>
     </div>
     <script>
+        //全局组件
+   Vue.component("todo-item",{
+       template:'<li @click="handleClick">{{content}}</li>',
+       props:["content","index"],
+       methods:{
+           handleClick:function(){
+                this.$emit("delete",this.index);
+           }
+       }
+   })
+    
+
+     //局部组件
+    //  var todoItem={
+    //      template:"<li>Item</li>"
+    //  };
+
     new Vue({
         el:"#app",
+        // components:{
+        //     'todo-item':todoItem
+        // },
         data:{
             lists:[],
             content:""
@@ -25,6 +46,9 @@
                     if(this.content)
                        this.lists.push(this.content);
                     this.content="";
+                },
+                handleDelete:function(index){
+                    this.lists.splice(index,1);
                 }
         }
     })
