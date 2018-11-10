@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     handleClick () {
-      if (this.content){
+      if (this.content) {
         this.items.push(this.content)
       }
       this.content = ''
@@ -36,5 +36,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>
