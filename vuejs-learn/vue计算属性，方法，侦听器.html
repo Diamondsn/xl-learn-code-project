@@ -10,20 +10,44 @@
    <div id="root">
        <input v-model="firstName"/><br />
        <input v-model="lastName" /><br />
-      {{fullName}}
-   </div>
+      {{"计算属性实现的"+fullName}}<br />
+      {{age}}<br />
+      {{"函数实现的"+getFullName()}}<br />
+      {{"监听实现的"+watchedFullName}}
+   </div>   
 
    <script>
        var vm= new Vue({
            el:'#root',
            data:{
                firstName:'',
-               lastName:''
+               lastName:'',
+               watchedFullName:'',
+               age:28,
+               count:0
            },
-           computed:{
+           computed:{//计算属性会有缓存
                 fullName:function(){
+                    this.count++;
+                    console.log("计算了"+this.count+"次");//当age改变的时候，不会更新
                     return this.firstName+this.lastName
                 }
+           },
+           methods:{
+                getFullName:function(){//使用方法同样可以实现相同功能
+                    console.log("函数计算了一次");//没有缓存机制，如果age改变了，也会重算
+                    return this.firstName+this.lastName;
+                }
+           },
+           watch:{
+              firstName:function(){//改变age时不会更改监听，也就是也会缓存
+                  console.log("监听到firstName改变");
+                  this.watchedFullName=this.firstName+this.lastName;
+              },
+              lastName:function(){
+                  console.log("监听到lastName改变")
+                  this.watchedFullName=this.firstName+this.lastName;
+              }
            }
        })
    </script>
