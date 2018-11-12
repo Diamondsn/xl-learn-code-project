@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue计算属性，方法，侦听器</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+   <div id="root">
+       <input v-model="firstName"/><br />
+       <input v-model="lastName" /><br />
+      {{fullName}}
+   </div>
+
+   <script>
+       var vm= new Vue({
+           el:'#root',
+           data:{
+               firstName:'',
+               lastName:''
+           },
+           computed:{
+                fullName:function(){
+                    return this.firstName+this.lastName
+                }
+           }
+       })
+   </script>
+</body>
+</html>

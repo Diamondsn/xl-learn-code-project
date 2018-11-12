@@ -7,12 +7,16 @@
 
 </head>
 <body>
-   <div id="root"></div>
+   <div id="root">
+       <div>{{content +'world'}}</div>
+       <div v-text="content +'world'"></div>
+       <div v-html="content + 'world'"></div>
+   </div>
 
    <script>
        var vm= new Vue({
            el:'#root',
-           template:'<div>{{content}}</div>',
+           //template:'<div>{{content}}</div>',
            data:{
               content:'hello'
            }
