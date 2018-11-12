@@ -21,8 +21,25 @@
                lastName:''
            },
            computed:{//计算属性会有缓存
-                fullName:function(){
-                    return this.firstName+this.lastName
+            //计算属性的最初写法
+                // fullName:function(){
+                //     return this.firstName+this.lastName
+                // }
+
+                //使用计算属性的setter和getter
+                fullName:{
+                    set: function (value) {
+                        console.log("计算属性的setter正在使用");
+                        var arr=value.split(" ");
+                        console.log(arr);
+                        this.firstName=arr[0];
+                        this.lastName=arr[arr.length-1];
+                        //使用方法:在控制台直接更改fullName时可同步更改其他两个firstName和lastName
+                    },
+                    get: function () {
+                         console.log("计算属性的getter正在使用");
+                         return this.firstName+this.lastName;
+                    }
                 }
            }
        })

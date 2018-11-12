@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue条件渲染</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+   <div id="root">
+     <div v-if="shown" @click="handleClick">Hello World</div>
+     <div v-else >Hello v-else</div>
+     <span>v-if -else-if</span>
+     <div v-if="str==='a'">this is a</div>
+     <div v-else-if="str==='b'">this is b</div>
+     <div v-else>this is c</div>
+     <div v-show='vshow' @click="handleShown">Hello Again</div>
+    </div>  
+
+   <script>
+       var vm= new Vue({
+           el:'#root',
+           data:{ 
+               shown:true,
+               vshow:true,
+               str:'a'
+           },
+           methods:{
+               handleClick:function(){
+                   this.shown=!this.shown;
+               },
+               handleShown:function(){
+                   this.vshow=!this.vshow;
+               }
+           }
+       })
+   </script>
+</body>
+</html>

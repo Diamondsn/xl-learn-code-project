@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue样式绑定</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <style>
+        .myclass {
+            color:red;
+        }
+    </style>
+</head>
+<body>
+   <div id="root">
+     <!-- <div v-if="shown" @click="handleClick">Hello World</div> -->
+     <div :class="{myclass:actived}" @click="handleClick">Hello World</div>
+     <div :class="[mydataclass]" @click="handleClick">Hello World 1</div>
+     <div :style="styleobj" @click="handleClick2">Hello World 2</div>
+     <div :style="[styleobj,{fontSize:'20px'}]" @click="handleClick2">Hello World 3</div>
+    </div>  
+
+   <script>
+       var vm= new Vue({
+           el:'#root',
+           data:{ 
+               shown:true,
+               actived:false,
+               mydataclass:'',//它是样式名的字符串
+               styleobj:{
+                   color:"green"//green是字符串
+               }
+           },
+           methods:{
+               handleClick:function(){
+                   this.shown=!this.shown;
+                   this.actived=!this.actived;
+                   this.mydataclass=this.mydataclass==="myclass"?"":"myclass";
+               },
+               handleClick2:function(){
+                   this.styleobj.color=this.styleobj.color==="green"?"pink":"green";
+               }
+           }
+       })
+   </script>
+</body>
+</html>
