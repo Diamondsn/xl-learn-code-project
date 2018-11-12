@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vuejs</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+	<div id="app">{{content}}</div>
+
+	<script>
+    //使用原生js
+    // var dom = document.getElementById('app');
+    // dom.innerHTML= 'hello world 1';
+    
+    // setTimeout(function(){
+    //    dom.innerHTML= 'bye world'
+    // }, 2000)
+
+	var vm = new Vue({
+         el: '#app',
+         data: {
+              content:'hello world'
+         }
+	})
+
+	setTimeout(function(){
+        vm.$data.content= 'bye world 1'
+	}, 2000)
+	</script>
+</body>
+</html>
