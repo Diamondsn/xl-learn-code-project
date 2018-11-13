@@ -26,8 +26,8 @@
                    //this.count++;//此处不要直接修改父组件传递给子组件的值
                    //单向数据流
                    //如果传递的是对象等引用型数据，会更改父组件的值
-                   this.num++;
-                   this.$emit('add');
+                   this.num+=2;
+                   this.$emit('add',2);
                }
            }
        }
@@ -38,11 +38,12 @@
              counter:counter
           },
           data:{
-              sum:0
+              sum:1
           },
           methods:{
-            handleAdd:function(){
-                this.sum=this.$refs.counter1.num+this.$refs.counter2.num;
+            handleAdd:function(value){
+                //this.sum=this.$refs.counter1.num+this.$refs.counter2.num;
+                this.sum+=value;
             }
           }
        })

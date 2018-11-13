@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue父子组件传值</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+   <div id="root">
+       <child></child>
+    </div>  
+
+   <script>
+      var child={
+          template:'<div>{{content}}</div>',
+          props:{
+              content:{
+                type:String,
+                required:false,
+                dafault:'dafault Value'
+             }//参数校验
+          }
+      };
+
+       var vm= new Vue({
+          el:'#root',
+          components:{
+             child:child
+          },
+          data:{
+              sum:1
+          },
+          methods:{
+            
+          }
+       })
+   </script>
+</body>
+</html>
