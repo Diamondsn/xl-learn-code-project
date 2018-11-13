@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue父子组件传值</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+   <div id="root">
+        <counter :count="0" ref='counter1' @add='handleAdd'></counter>
+        <counter :count="1" ref='counter2' @add='handleAdd'></counter>
+        <div>{{sum}}</div>
+    </div>  
+
+   <script>
+       var counter={
+           template:'<div @click="handleClick">{{num}}</div>',
+           props:["count"],
+           data:function(){
+                 return{
+                     num:this.count
+                 }    
+           },
+           methods:{
+               handleClick:function(){
+                   //this.count++;//此处不要直接修改父组件传递给子组件的值
+                   //单向数据流
+                   //如果传递的是对象等引用型数据，会更改父组件的值
+                   this.num++;
+                   this.$emit('add');
+               }
+           }
+       }
+
+       var vm= new Vue({
+          el:'#root',
+          components:{
+             counter:counter
+          },
+          data:{
+              sum:0
+          },
+          methods:{
+            handleAdd:function(){
+                this.sum=this.$refs.counter1.num+this.$refs.counter2.num;
+            }
+          }
+       })
+   </script>
+</body>
+</html>

@@ -7,23 +7,84 @@
 </head>
 <body>
    <div id="root">
-      <table>
-          <!-- tbody里必须接tr，所以需要用is属性 -->
-          <tbody>
+      <!-- <table> -->
+          <!-- tbody里必须接tr，所以需要用is属性，符合h5规范 -->
+          <!-- <tbody>
              <tr is="row"></tr>
              <tr is="row"></tr>
              <tr is="row"></tr>
           </tbody>
       </table>
+      <ul>
+          <li is="row"></li>
+     </ul>
+     <select>
+         <option is="row"></option>
+     </select> -->
+
+
+     <table>
+         <tbody>
+             <tr is="row"></tr>
+             <tr is="row"></tr>
+             <tr is="row"></tr>
+         </tbody>
+     </table>
+
+    <div ref="mydiv" @click="handleClick">Hello World</div>
+
+
+    <!-- 计数器体现组件使用ref -->
+    <counter ref="counter1" @add="handleAdd"></counter>
+        <counter ref="counter2" @add="handleAdd"></counter>
+        <div>总和为:{{sum}}</div>
     </div>  
 
    <script>
 
-       Vue.component('row',{
-           template:'<tr><td>this is a row</td></tr>'
+       Vue.component('row',{//非根节点调用多次所以返回的data必须独立
+           template:'<tr><td>{{content}}</td></tr>',
+           data:function() {//非根节点的data必须是函数且返回对象
+               return{
+                    content:"this is a row"
+               }
+           }
        })
+
+
+       Vue.component('counter',{
+           template:'<div @click="handleCounterClick">{{number}}</div>',
+           data:function(){
+                return{
+                         number:0
+                }
+           },
+           methods:{
+            handleCounterClick:function(){
+                 this.number++;
+                 this.$emit("add");
+            }
+           }
+       })
+
+
        var vm= new Vue({
-          el:'#root'
+          el:'#root',
+          data:{
+              sum:0
+          },
+          methods:{
+              handleClick:function(){
+                  var dom=this.$refs.mydiv;
+                  console.log(dom.innerHTML);
+              },
+              handleAdd:function(){
+                    // this.sum++;
+
+                    //使用ref求和,在组件上使用ref返回的是组件的引用
+                    this.sum=this.$refs.counter1.number+this.$refs.counter2.number;
+              }
+          }
        })
    </script>
 </body>
