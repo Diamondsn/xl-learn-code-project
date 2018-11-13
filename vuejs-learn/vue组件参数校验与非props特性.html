@@ -7,19 +7,22 @@
 </head>
 <body>
    <div id="root">
-       <child></child>
+       <child content="hello5"></child>
     </div>  
 
    <script>
-      var child={
-          template:'<div>{{content}}</div>',
-          props:{
-              content:{
-                type:String,
-                required:false,
-                dafault:'dafault Value'
-             }//参数校验
-          }
+      var child={ 
+          template:'<div>hello</div>',//非props特性会显示在标签的属性上
+        //   props:{
+        //       content:{
+        //         type:String,
+        //         // required:false,
+        //         // dafault:"dafault Value"
+        //         validator:function(value){//字符串的长度必须大于5
+        //             return value.length>5;
+        //         }
+        //      }//参数校验
+        //   }
       };
 
        var vm= new Vue({
