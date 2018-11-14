@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue非父子组件间传值(bus/总线/发布订阅模式/观察者模式)</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+   <div id="root">
+       <child content="child1"></child>
+       <child content="child2"></child>
+    </div>  
+
+   <script>
+
+      Vue.prototype.bus=new Vue()//总线机制
+
+       Vue.component("child",{
+           template: '<div @click="handleClick">{{con}}</div>',
+           data:function(){
+               return{
+                   con:this.content
+               }
+           },
+           props: {
+               content: String
+           },
+           methods: {
+               handleClick: function () {
+                   //console.log(this.content);
+                   this.bus.$emit("change", this.con);
+               }
+           },
+           mounted: function () {
+              var this_=this;//作用域不同，此时的this
+               this.bus.$on("change", function (value) {
+                    //console.log(value);//会弹两次
+                    this_.con=value;
+               })
+           }
+       })
+       var vm= new Vue({
+          el:'#root'
+       })
+   </script>
+</body>
+</html>
