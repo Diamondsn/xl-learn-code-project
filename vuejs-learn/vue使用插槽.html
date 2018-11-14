@@ -8,15 +8,26 @@
 <body>
    <div id="root">
      <!-- <child content="<p>hello</p>"></child> -->
-     <child><p>hello</p></child>
+     <!-- <child><h1>hello</h1></child> -->
+     <mycontent>
+         <!-- <div class="header" slot="header">header</div> -->
+         <div class="footer" slot="footer">footer</div>
+     </mycontent>
     </div>  
 
    <script>
+       Vue.component("mycontent",{
+           template:`<div>
+           <slot name="header"><div>default header</div></slot>
+           <div class="mycalss">Hello</div>
+           <slot name="footer"></slot>
+           </div>`
+       })//具名插槽
     Vue.component("child", {
             // template: '<div v-html="content"></div>',
             // props:["content"]
 
-            template:"<div><slot></slot></div>"
+            template:"<div><p>hello</p><slot>默认内容</slot></div>"
         })
 
         var vm = new Vue({

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue动态组件与v-once指令</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+   <div id="root">
+      <type-one v-if="show==='type-one'">
+          
+      </type-one >
+      <type-two v-else-if="show==='type-two'">
+
+      </type-two>
+
+      <!-- 动态组件 -->
+      <!-- <component :is="show"></component> -->
+
+      <button @click="handleChange">change</button>
+    </div>  
+
+   <script>
+        Vue.component("type-one", {
+            template: '<div v-once>child1</div>'//v-once改善静态内容的显示性能
+        })
+
+        Vue.component("type-two", {
+            template: '<div v-once>child2</div>'
+        })
+
+        var vm = new Vue({
+                el: '#root',
+                data:{
+                    show:'type-one'
+                },
+                methods:{
+                    handleChange:function(){
+                        this.show=this.show==='type-one'?'type-two':'type-one';
+                    }
+                }
+            })
+   </script>
+</body>
+</html>
