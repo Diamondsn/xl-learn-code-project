@@ -4,8 +4,9 @@
 	<meta charset="UTF-8">
 	<title>vue使用animate.css库</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./animate.css">
     <style>
-       @keyframes bounce-in {
+       /* @keyframes bounce-in {
            0% {
                transform:scale(0);
            }
@@ -31,14 +32,31 @@
         .leave {
             transform-origin:left center;
             animation:bounce-in 1s reverse;
+        } */
+
+        .fade-enter,.fade-leave-to {
+            opacity: 0;
+        }
+        .fade-leave-active,.fade-enter-active {
+            transition: opacity 1s;
         }
     </style>
 </head>
 <body>
    <div id="root">
-        <transition name='fade'
+        <!-- <transition name='fade'
         enter-active-class="enter"
         leave-active-class="leave">
+         <div v-show="show">CSS动画</div>
+        </transition> -->
+
+            <transition name='fade'
+          
+            :duration="{enter:5000,leave:10000}"
+            appear
+        enter-active-class="animated swing fade-enter-active"
+        leave-active-class="animated shake fade-leave-active"
+        appear-active-class="animated swing">
          <div v-show="show">CSS动画</div>
         </transition>
 
