@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue列表过渡</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="./velocity.js"></script>
+    <link rel="stylesheet" type="text/css" href="./animate.css">
+    <!-- <style>
+    .fade-enter,.fade-leave-to {
+        opacity:0;
+    }
+    .fade-enter-active,.fade-leave-active {
+        transition: opacity 1s;
+    }
+
+    .v-enter,.v-leave-to {
+        opacity: 0;
+    }
+    .v-enter-active,.v-leave-active {
+        transition: opacity 1s;
+    }
+    </style> -->
+</head>
+<body>
+   <div id="root">
+        <button @click="handleClick">Add</button>
+        <!-- <transition name="fade">
+           <div v-show="show">Hello World</div>
+        </transition> -->
+
+        <fade :show="show">
+            <div>Hello World</div>
+        </fade>
+    </div>  
+
+   <script>
+        //封装动画组件
+        Vue.component("fade",{
+            template:`<transition @before-enter="handleBeforeEnter" @enter="handleEnter">
+                <slot v-if="show"></slot>
+                </transition>
+                `,
+                props:["show"],
+                methods:{
+                    handleBeforeEnter:function(el){
+                        el.style.color='red';
+                    },
+                    handleEnter:function(el,done){
+                        setTimeout(()=>{
+                            el.style.color="green";
+                            done();
+                        },2000)
+                    }
+                }
+        })
+
+        var vm = new Vue({
+                el: '#root',
+          data:{
+             show:true
+          },
+          methods:{
+              handleClick:function(){
+                   this.show=!this.show;
+              }
+          }
+            })
+   </script>
+</body>
+</html>
