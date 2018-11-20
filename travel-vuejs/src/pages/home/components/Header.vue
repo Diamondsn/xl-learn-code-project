@@ -1,6 +1,16 @@
 <template>
-<div>
-  this is header
+<div class="header">
+  <div class="header-left">
+      <div class="iconfont back-icon">&#xe624;</div>
+  </div>
+  <div class="header-input">
+      <sapn class="iconfont">&#xe632;</sapn>
+      输出城市/景点/游玩
+  </div>
+  <div class="header-right">
+      城市
+      <sapn class="iconfont arrow-icon">&#xe64a;</sapn>
+  </div>
 </div>
 </template>
 
@@ -11,5 +21,38 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="stylus" scoped>
+/* vscode使用以下两个选项设置显示控制字符和空格*/
+/* renderControlCharacters*/
+/* renderWhitespace*/
+/* rem 是相对于html的font-size为50px进行设置的,同时是两倍屏的设计稿，所以量的多少就是多少rem*/
+  @import "~styles/varibles.styl"
+  .header
+    display: flex
+    line-height: .86rem
+    background: $bgColor
+    color: #fff
+    .header-left
+      width: .64rem
+      float: left
+      .back-icon
+        text-align: center
+        font-size: .4rem
+    .header-input
+      flex: 1
+      height: .64rem
+      line-height: .64rem
+      margin-top: .12rem
+      margin-left: .2rem
+      padding-left: .2rem
+      background: #fff
+      border-radius: .1rem
+      color: #ccc
+    .header-right
+      width: 1.24rem
+      float: right
+      text-align: center
+      .arrow-icon
+        margin-left: -.04rem
+        font-size: .24rem
 </style>
