@@ -1,0 +1,9 @@
+<view class="todolistcontainer">
+  <view class="todolistinput">
+     <input bindinput="bindInput" placeholder="输入待办事项" autofocus></input>
+     <button bindtap="bindAdd">添加</button>
+  </view>
+  <view class="todolist">
+     <List list="{{list}}"></List>
+  </view>
+</view>

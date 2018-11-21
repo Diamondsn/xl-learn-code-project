@@ -1,0 +1,23 @@
+/* pages/ListItem.wxss */
+.ListItemContainer {
+  width:100%;
+  display: flex;
+}
+
+.itemtext {
+  float:left;
+  justify-content:center;
+  line-height:2.5;
+  text-align:center;
+}
+
+.btndelete {
+  height:80%;
+  width:50%;
+  float:right;
+  flex:1;
+}
+
+.del {
+  color: red;
+}

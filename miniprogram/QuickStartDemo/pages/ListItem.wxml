@@ -1,0 +1,7 @@
+<!--pages/ListItem.wxml-->
+<view class="ListItemContainer">
+   <view class="itemtext">{{index+1}}.{{item}}</view>
+   <view class="btndelete">
+      <button class="del" bindtap="bindDelete">删除</button>
+   </view>
+</view>

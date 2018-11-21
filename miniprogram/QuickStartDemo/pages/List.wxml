@@ -1,0 +1,7 @@
+<!--pages/List.wxml-->
+<view class="listcontainer">
+    <block wx:for="{{list}}" wx:for-item="item" wx:key="index">
+       <!-- <text class="listitem">{{index+1}}.{{item}}</text> -->
+       <ListItem index="{{index}}" item="{{item}}"></ListItem>
+    </block>
+</view>

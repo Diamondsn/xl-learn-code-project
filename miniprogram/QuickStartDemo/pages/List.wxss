@@ -1,0 +1,10 @@
+/* pages/List.wxss */
+.listcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items:left;
+}
+
+.listitem {
+  margin:5rpx;
+}

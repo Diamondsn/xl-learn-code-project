@@ -1,0 +1,13 @@
+.todolistcontainer {
+  padding: 100rpx;
+  height: 100%;
+}
+
+.todolist {
+  margin: 10rpx;
+}
+
+input {
+  border: 1rpx solid green;
+  border-radius: 3rpx;
+}
