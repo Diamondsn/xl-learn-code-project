@@ -5,6 +5,16 @@
     <meta charset="utf-8">
     <title>拳皇</title>
     <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            background-image: url(bg.jpg);
+            background-repeat:no-repeat;
+        }
+
         #site {
             position: relative;
             height: 100%;
@@ -39,7 +49,7 @@
         }
         var person = new Person(quanhuang);
 
-         //键盘按键码和动作的对应关系
+        //键盘按键码和动作的对应关系
         var active = {
             "68": "andvance",
             "65": "retreat",
@@ -49,36 +59,49 @@
         };
 
         //人物名称和不同动作的对应关系，即人物技能表
-        var skills={
-            "mc":{
-                "andvance":function(){
-                      console.log("mc前进");
+        var skills = {
+            "mc": {
+                "andvance": function () {
+                    this.src="advance.gif";
+                    this.style.left="50px";
+                    console.log("mc前进");
                 },
-                "retreat":function(){
+                "retreat": function () {
+                    this.src="retreat.gif";
+                    this.style.left="0";
                     console.log("mc后退");
                 },
-                "jump":function(){
+                "jump": function () {
+                    this.style.bottom="100px";
+                    var _this=this;
+                    setTimeout(function(){
+                        _this.style.bottom="50px"
+                    },200);
                     console.log("mc跳跃");
                 },
-                "squat":function(){
+                "squat": function () {
+                    this.style.height="175px";
+                    var _this=this;
+                    setTimeout(function(){
+                        _this.style.height="350px";
+                    },200)
                     console.log("mc蹲下");
                 },
-                "boom":function(){
+                "boom": function () {
+                    this.src="boom.gif";
                     console.log("mc集气");
                 }
             }
         };
-        
-        function makeCommand(person,keyValue){
 
-            var actives=active[keyValue];
-            if(!actives)return;
-            var skill=skills[person.name];
-            if(!skill)return;
-            var fun=skill[actives];
-            if(!fun)return;
-            return function(){
-                fun();
+        function makeCommand(person, keyValue) {
+
+            var actives = active[keyValue];
+            if (!actives) return;
+            var skill = skills[person.name];
+            if (!skill) return;
+            return function () {
+                skill[actives].call(person.presonNode);
             }
         }
 
@@ -86,12 +109,12 @@
             var keyValue = e.keyCode;
             // if(active[keyValue.toString()])
             //     skills[person.name][active[keyValue.toString()]]();
-            var command=makeCommand(person,keyValue);
-            if(command)
+            var command = makeCommand(person, keyValue);
+            if (command)
                 command();
         }
 
-        
+
     </script>
 </body>
 
