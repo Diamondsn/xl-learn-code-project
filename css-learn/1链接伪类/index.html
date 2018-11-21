@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css伪类</title>
+    <style type="text/css">
+        /* 链接伪类需要注意顺序，必须是:link :visited :hover :active */
+
+        /*1.a:hover必需在a:link和a:visited之后才有效
+        2.a:active必须在a:hover之后才有效
+        3.伪类名称不区分大小写 */
+
+        a:link {
+            color: green;
+        }
+
+        a:visited {
+            color: gray;
+        }
+
+        a:hover {
+            color: orange;
+        }
+
+        a:active {
+            color: red;
+        }
+
+        p:hover {
+            color: blue;
+        }
+
+        p:active {
+            font-size: 20px;
+        }
+
+        /* 其他更复杂的链接伪类选择器
+        div a:link{}
+        a.one:link{} */
+    </style>
+</head>
+
+<body>
+    <a href="www.baidu.com" target="_blank">百度一下</a>
+    <br />
+    <a href="www.baidu.com" target="_blank">百度一下2</a>
+    <p>这是一段文字</p>
+</body>
+
+</html>
