@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>拳皇</title>
+    <style>
+        #site {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        img {
+            position: absolute;
+            bottom: 50px;
+            width: 200px;
+            height: 350px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="site">
+        <img src="stand.gif" namedata="mc" id="quanhuang" />
+    </div>
+    <script>
+        /*键码
+        前进d 68
+        h后退a 65
+        跳跃w 87
+        蹲下s 83
+        集气o 79
+        */
+        var quanhuang = document.getElementById("quanhuang");
+        function Person(quanhuang) {
+            this.presonNode = quanhuang;//this指向实例化的对象本身
+            this.name = quanhuang.getAttribute("namedata");
+        }
+        var person = new Person(quanhuang);
+
+         //键盘按键码和动作的对应关系
+        var active = {
+            "68": "andvance",
+            "65": "retreat",
+            "87": "jump",
+            "83": "squat",
+            "79": "boom"
+        };
+
+        //人物名称和不同动作的对应关系，即人物技能表
+        var skills={
+            "mc":{
+                "andvance":function(){
+                      console.log("mc前进");
+                },
+                "retreat":function(){
+                    console.log("mc后退");
+                },
+                "jump":function(){
+                    console.log("mc跳跃");
+                },
+                "squat":function(){
+                    console.log("mc蹲下");
+                },
+                "boom":function(){
+                    console.log("mc集气");
+                }
+            }
+        };
+        
+        function makeCommand(person,keyValue){
+
+            var actives=active[keyValue];
+            if(!actives)return;
+            var skill=skills[person.name];
+            if(!skill)return;
+            var fun=skill[actives];
+            if(!fun)return;
+            return function(){
+                fun();
+            }
+        }
+
+        document.onkeydown = function (e) {
+            var keyValue = e.keyCode;
+            // if(active[keyValue.toString()])
+            //     skills[person.name][active[keyValue.toString()]]();
+            var command=makeCommand(person,keyValue);
+            if(command)
+                command();
+        }
+
+        
+    </script>
+</body>
+
+</html>
