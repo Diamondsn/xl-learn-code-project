@@ -1,9 +1,9 @@
 <template>
 <!-- 外层添加div是为了保证当轮播图下面有其他组件或者文字的时候，图片加载较慢，可能会出现页面抖动的情况-->
 <div class="wrapper">
-<swiper :options="swiperOption">
+<swiper :options="swiperOption" v-if="showSwiper">
     <!-- slides -->
-    <swiper-slide v-for="item of swiperList" :key="item.id">
+    <swiper-slide v-for="item of list" :key="item.id">
        <img class="swiper-img" :src="item.imgUrl" />
     </swiper-slide>
     <!-- Optional controls -->
@@ -21,11 +21,19 @@ export default {
     swiper,
     swiperSlide
   },
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop: true
+        loop: true,
+        autoplay: {
+          delay: true,
+          speed: 300,
+          disableOnInteraction: false
+        }
       },
       swiperList: [{
         id: '0001',
@@ -34,6 +42,11 @@ export default {
         id: '0002',
         imgUrl: 'http://img1.qunarzz.com/piao/fusion/1811/7c/8e5c4ab8ee8b7402.jpg_750x200_dd7a38dd.jpg'
       }]
+    }
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length
     }
   }
 }
@@ -47,7 +60,7 @@ export default {
   width: 100%
   height: 0
   overflow: hidden
-  padding-bottom: 26.6%
+  padding-bottom: 31.25%
   background: #eee
   /*可以使用height: 31.25vw来替换overflow:hidden和height:0和padding-bottom:31.25% */
   .swiper-img

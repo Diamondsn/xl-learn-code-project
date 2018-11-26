@@ -9,7 +9,7 @@
       <p class="icon-desc">{{item.desc}}</p>
     </div>
   </swiper-slide>
-   <div v-if="pages.length>1" class="swiper-pagination"  slot="pagination"></div>
+   <div v-show="showPagination" class="swiper-pagination"  slot="pagination"></div>
   </swiper>
   </div>
 </template>
@@ -19,6 +19,9 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   components: {
     swiper,
     swiperSlide
@@ -28,6 +31,7 @@ export default {
       swiperOption: {
         pagination: '.swiper-pagination'
       },
+      showPagination: false,
       iconList: [{
         id: '0001',
         imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
@@ -74,7 +78,7 @@ export default {
   computed: {
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
@@ -82,6 +86,15 @@ export default {
         pages[page].push(item)
       })
       return pages
+    }
+  },
+  watch: {
+    list () {
+      if (this.list.length > 8) {
+        this.showPagination = true
+      } else {
+        this.showPagination = false
+      }
     }
   }
 }
