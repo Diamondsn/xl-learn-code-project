@@ -9,6 +9,7 @@
       <p class="icon-desc">{{item.desc}}</p>
     </div>
   </swiper-slide>
+   <div v-if="pages.length>1" class="swiper-pagination"  slot="pagination"></div>
   </swiper>
   </div>
 </template>
@@ -92,6 +93,8 @@ export default {
 .icons >>> .swiper-container
   height: 0
   padding-bottom: 50%
+.icons
+  margin-top: .1rem
   .icon
     position:relative
     overflow:hidden
