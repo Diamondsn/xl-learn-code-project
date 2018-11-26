@@ -4,12 +4,12 @@
       <div class="iconfont back-icon">&#xe624;</div>
   </div>
   <div class="header-input">
-      <sapn class="iconfont">&#xe632;</sapn>
+      <span class="iconfont">&#xe632;</span>
       输出城市/景点/游玩
   </div>
   <div class="header-right">
       城市
-      <sapn class="iconfont arrow-icon">&#xe64a;</sapn>
+      <span class="iconfont arrow-icon">&#xe64a;</span>
   </div>
 </div>
 </template>
