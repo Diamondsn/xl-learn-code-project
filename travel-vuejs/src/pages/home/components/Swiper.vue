@@ -28,10 +28,18 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
+        // 修改swiper自己或子元素时， 自动初始化swiper
+        observer: true,
+        // 修改swiper的父元素时， 自动初始化swiper
+        observeParents: true,
         loop: true,
-        autoplay: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
         speed: 2000
       },
+      update: true,
       swiperList: [{
         id: '0001',
         imgUrl: 'http://img1.qunarzz.com/piao/fusion/1811/f3/2a2cdc94741bbb02.jpg_750x200_b7b90c75.jpg'
@@ -43,8 +51,14 @@ export default {
   },
   computed: {
     showSwiper () {
-      return this.list.length
+      return this.list.length && this.update
     }
+  },
+  activated () {
+    this.update = false
+    setTimeout(() => {
+      this.update = true
+    }, 1)
   }
 }
 </script>
