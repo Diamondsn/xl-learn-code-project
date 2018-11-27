@@ -1,16 +1,37 @@
 <template>
-<div class="banner">
+<div>
+<div class="banner" @click="handleBannerClick">
   <img class="banner-img" src="//img1.qunarzz.com/sight/p0/1705/99/99cad7081abb9771a3.img.jpg_600x330_25e27e6d.jpg" />
   <div class="banner-info">
      <div class="banner-title">知音号游船</div>
      <div class="banner-number"><span class="iconfont banner-icon">&#xe608;</span>34</div>
   </div>
 </div>
+<common-gallary :imgs="imgs" v-show="showGallary" @close="handleGallaryClose"></common-gallary>
+</div>
 </template>
 
 <script>
+import CommonGallary from 'common/gallary/gallary'
 export default {
-  name: 'DetailBanner'
+  name: 'DetailBanner',
+  components: {
+    CommonGallary
+  },
+  data () {
+    return {
+      imgs: ['http://img1.qunarzz.com/sight/p0/1705/99/99cad7081abb9771a3.img.jpg_r_800x800_e440db5b.jpg', 'http://img1.qunarzz.com/sight/p0/1805/82/82a99919b21ac6a4a3.water.jpg_r_800x800_1d5abdaf.jpg'],
+      showGallary: false
+    }
+  },
+  methods: {
+    handleBannerClick () {
+      this.showGallary = true
+    },
+    handleGallaryClose () {
+      this.showGallary = false
+    }
+  }
 }
 </script>
 
