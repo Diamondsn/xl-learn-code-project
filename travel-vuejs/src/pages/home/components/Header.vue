@@ -17,10 +17,12 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  computed: {
+    ...mapState(['city']),
+    ...mapGetters(['doubleCity'])
   }
 }
 </script>
@@ -32,6 +34,7 @@ export default {
 /* renderWhitespace*/
 /* rem 是相对于html的font-size为50px进行设置的,同时是两倍屏的设计稿，所以量的多少就是多少rem*/
   @import "~styles/varibles.styl"
+  @import '~styles/mixins.styl'
   .header
     display: flex
     line-height: $headerHeight
@@ -55,7 +58,8 @@ export default {
       color: #ccc
     .header-right
       color: #fff
-      width: 1.24rem
+      min-width: 1.04rem
+      padding: 0 .1rem
       float: right
       text-align: center
       .arrow-icon
