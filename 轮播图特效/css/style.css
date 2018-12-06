@@ -3,6 +3,15 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "iconfont";
+  src:url("../img/font/iconfont.eot");
+  src:url("../img/font/iconfont.eot") format("embedded-opentype"),
+      url("../img/font/iconfont.woff") format("woff"),
+      url("../img/font/iconfont.ttf") format("truetype"),
+      url("../img/font/iconfont.svg#icont") format("svg");
+}
+
 ul {
   list-style: none;
 }
@@ -17,17 +26,24 @@ body {
   width:1200px;
   margin: 30px auto;
   overflow: hidden;
+  position: relative;
 }
 
 .banner {
   height:460px;
   width:1200px;
+  overflow: hidden;
+  position: relative;
 }
 
 .banner-slider {
   height:460px;
   width:1200px;
   background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
 }
 
 .slider1 {
@@ -40,4 +56,119 @@ body {
 
 .slider3 {
   background-image:url(../img/bg3.jpg);
+}
+
+.slider-active{
+  display:block;
+}
+
+.button {
+  position: absolute;
+  left:244px;
+  top:50%;
+  width:40px;
+  height: 80px;
+  margin-top:-40px;
+  background:url(../img/arrow.png) center center no-repeat;
+}
+
+.button:hover {
+  background-color:#333;
+  opacity:0.8;
+}
+
+.prev {
+  transform: rotate(180deg);
+}
+
+.next {
+  left:auto;
+  right:0;
+}
+
+.dots {
+  position: absolute;
+  right:20px;
+  bottom: 12px;
+  text-align:right;
+}
+
+.dots span {
+  display:inline-block;
+  width:12px;
+  height:12px;
+  line-height:12px;
+  border-radius:50%;
+  background: rgba(7,17,27,0.4);
+  margin-left:8px;
+  /*border:2px solid #fff;*/
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.8) inset;
+  cursor:pointer;
+}
+
+.dots span.active {
+  box-shadow: 0 0 0 2px rgba(7,17,27,0.4) inset;
+  background:#fff;
+}
+
+.nav-container {
+  height: 460px;
+  width:244px;
+  position:absolute;
+  left:0;
+  top:0;
+  background:rgba(7,17,27,0.5);
+  opacity:0.5;
+}
+
+.nav-content {
+  height: 460px;
+  width:244px;
+  position:absolute;
+  left:0;
+  top:0;
+  padding-top:6px;
+}
+
+ul {
+  height: 460px;
+  width:244px;
+}
+
+li {
+  position: relative;
+  height: 64px;
+  line-height:66px;
+  font-size:16px;
+  cursor:pointer;
+  padding:0 24px;
+  border-bottom: 1px solid rgba(155,255,255,0.2);
+}
+
+.iconfont {
+  font-family:"iconfont";
+  font-size:24px;
+  position: absolute;
+  right:32px;
+  color:rgba(255,255,255,0.5);
+}
+
+.submenu {
+  height:458px;
+  width:730px;
+  position: absolute;
+  left:244px;
+  top:0;
+}
+
+.inner-box {
+  height:460px;
+  background-image: url(../img/fe.png);
+  padding-left:30px;
+  font-size:24px;
+  box-shadow:0 4px 8px 0 rgba(0,0,0,0.5);
+}
+
+.hide {
+  display:none;
 }
