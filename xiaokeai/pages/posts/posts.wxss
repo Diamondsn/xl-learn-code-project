@@ -68,10 +68,9 @@
 }
 
 .star,.view{
-  width:50rpx;
-  height:50rpx;
+  width:32rpx;
+  height:32rpx;
   margin-left:10px;
-  margin-right:10px;
 }
 
 .post-like-num{
