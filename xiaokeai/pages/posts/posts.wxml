@@ -16,7 +16,7 @@
       <image class="user-avatar" src="/images/avatar/1.png"></image>
       <text class="user-time">Sep 18 2016</text>
     </view>
-    <text class="post-title">我的小可爱</text>
+    <text class="post-title">永远爱我的小可爱</text>
     <image class="post-img" src="/images/post/sls.jpg"></image>
     <text class="post-word">永远爱我的小可爱</text>
     <view class="star-view">
