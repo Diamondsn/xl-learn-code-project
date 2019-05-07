@@ -13,9 +13,9 @@ var local_database = [
         detail: "菊黄蟹正肥，品尝秋之味。徐志摩把“看初花的荻芦”和“到楼外楼吃蟹”并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，壳凸红脂块块香”；在《世说新语》里，晋毕卓更是感叹“右手持酒杯，左手持蟹螯，拍浮酒船中，便足了一生矣。”漫漫人生长路，美食与爱岂可辜负？于是作为一个吃货，突然也很想回味一下属于我的味蕾记忆。记忆中的秋蟹，是家人的味道，弥漫着浓浓的亲情。\n\n是谁来自山川湖海，却囿于昼夜，厨房与爱？ 是母亲，深思熟虑，聪明耐心。吃蟹前，总会拿出几件工具，煞有介事而乐此不疲。告诉我们螃蟹至寒，需要佐以姜茶以祛寒，在配备的米醋小碟里，亦添入姜丝与紫苏，前者驱寒后者增香。泡好菊花茶，岁月静好，我们静等。",
         postId: 0,
         music: {
-            url: "http://ws.stream.qqmusic.qq.com/C100003507bR0gDKBm.m4a?fromtag=38",
-            title: "夜夜夜夜-齐秦",
-            coverImg: "http://y.gtimg.cn/music/photo_new/T002R150x150M000001TEc6V0kjpVC.jpg?max_age=2592000"
+          url: "http://dl.stream.qqmusic.qq.com/M5000021rBlZ1gQiLy.mp3?vkey=22600A8DC49C0FD7814E4619ED06820B8BB559FE62E2010B60D5BBBD59F788C00815EEB1C765AC322B72A8B6CE2506765167FDA9C4FE4DAC&guid=5150825362&fromtag=1",
+          title: "绿色- 陈雪凝",
+          coverImg: "http://y.gtimg.cn/music/photo_new/T002R300x300M0000010UePb4dyfoi.jpg"
         }
     },
     {
@@ -32,9 +32,9 @@ var local_database = [
         avatar: "/images/avatar/1.png",
         postId: 1,
         music: {
-            url: "http://ws.stream.qqmusic.qq.com/C100003GdCmG4NkEOR.m4a?fromtag=38",
-            title: "鬼迷心窍-李宗盛",
-            coverImg: "http://y.gtimg.cn/music/photo_new/T002R150x150M000002xOmp62kqSic.jpg?max_age=2592000"
+          url: "http://dl.stream.qqmusic.qq.com/M500002E3MtF0IAMMY.mp3?vkey=C578938AF214DDF240255026F872671297DFBC972EFDF800CCA515FCDCDB66AF3B6D2577F4AE05940A74C689444BB45B6BF048242E54ADDE&guid=5150825362&fromtag=1",
+          title: "光年之外 - G.E.M. 邓紫棋",
+          coverImg: "http://y.gtimg.cn/music/photo_new/T002R300x300M000001mTkmb4GJlh4.jpg"
         }
     },
     {

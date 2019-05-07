@@ -1,9 +1,13 @@
 var postsData = require("../../../data/posts-data.js");
+var app=getApp();
+
 Page({
   data: {
-   isPlayingMusic:false
+    isPlayingMusic: false
   },
   onLoad: function(option) {
+    var globalData=app.globalData;
+   
     var postId = option.id;
     this.data.currentPostId = postId;
     var postData = postsData.postList[postId];
@@ -23,6 +27,30 @@ Page({
       var postsCollected = {};
       postsCollected[postId] = false;
       wx.setStorageSync("postsCollected", postsCollected);
+    }
+    var that = this;
+    wx.onBackgroundAudioPlay(function() {
+      that.setData({
+        isPlayingMusic: true
+      });
+
+      app.globalData.g_isPlayingMusic=true;
+      app.globalData.g_currentPostId = that.data.currentPostId;
+    })
+    wx.onBackgroundAudioPause(function() {
+      that.setData({
+        isPlayingMusic: false
+      });
+
+      app.globalData.g_isPlayingMusic = false;
+      app.globalData.g_currentPostId=null;
+    })
+
+
+    if (app.globalData.g_isPlayingMusic && this.data.currentPostId===app.globalData.g_currentPostId){
+      this.setData({
+        isPlayingMusic: true
+      });
     }
   },
   onCollectionTap: function() {
@@ -87,19 +115,25 @@ Page({
       }
     })
   },
-  onMusicTap:function(event){
-    var isPlayingMusic=this.data.isPlayingMusic;
-if(!isPlayingMusic){
-    wx.playBackgroundAudio({
-      dataUrl: 'http://ws.stream.qqmusic.qq.com/C100004HLusI2lLjZy.m4a?fromtag=38',
-      title: '女儿情 - 万晓利',
-      converImgUrl: "http://y.gtimg.cn/music/photo_new/T002R150x150M000004Wv5BO30pPc0.jpg?max_age=2592000"
-    });
-    this.setData({isPlayingMusic:true})
-}else{
-    wx.pauseBackgroundAudio();
-  this.setData({ isPlayingMusic: false })
-}
+  onMusicTap: function(event) {
+    var isPlayingMusic = this.data.isPlayingMusic;
+    var currentPostId = this.data.currentPostId;
+    var postdata = postsData.postList[currentPostId];
+    if (!isPlayingMusic) {
+      wx.playBackgroundAudio({
+        dataUrl: postdata.music.url,
+        title: postdata.music.title,
+        converImgUrl: postdata.music.coverImg
+      });
+      this.setData({
+        isPlayingMusic: true
+      })
+    } else {
+      wx.pauseBackgroundAudio();
+      this.setData({
+        isPlayingMusic: false
+      })
+    }
   }
 
 })

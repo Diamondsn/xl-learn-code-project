@@ -7,5 +7,8 @@
   "window": {
     "navigationBarBackgroundColor": "#123452"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "requiredBackgroundModes": [
+    "audio"
+  ]
 }
