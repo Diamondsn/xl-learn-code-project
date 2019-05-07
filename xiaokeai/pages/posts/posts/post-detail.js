@@ -1,4 +1,4 @@
-// pages/posts/posts.js
+// pages/posts/posts/post-detail.js
 Page({
 
   /**
@@ -12,15 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var postData=require("../../data/posts-data.js");
-    this.setData({ post_data: postData.postList});
-  },
 
-  onPostTap:function(event){
-    var postid=event.currentTarget.dataset.postid;
-    wx.navigateTo({
-      url: 'post-detail/post-detail?id='+postid,
-    })
   },
 
   /**
