@@ -5,9 +5,12 @@
   background-color:#fff;
 }
 
+.inner-container{
+margin:0 auto 20rpx;
+}
+
 .movie-head{
-  display:flex;
-  flex-direction:row;
+  padding:30rpx 20rpx 22rpx;
 }
 
 .slogon{
@@ -15,8 +18,7 @@
 }
 
 .more{
-  position:absolute;
-  right:0;
+  float:right;
 }
 
 .more-text{

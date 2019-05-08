@@ -1,7 +1,11 @@
 <!--pages/movies.wxml-->
 <import src="movie-list/movie-list.wxml" />
-<view>
+<view class="container">
+<view class="movies-template">
+<template  is="movieListTemplate" data="{{movies}}" />
+</view>
+<view class="movies-template">
 <template is="movieListTemplate" />
-<template is="movieListTemplate" />
+</view>
 <template is="movieListTemplate" />
 </view>
