@@ -87,6 +87,13 @@ Page({
   onBindChange:function(event){
     console.log(event);
   },
+
+  onCancelTap:function(){
+    this.setData({
+      containerShow: true,
+      searchResultShow: false
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

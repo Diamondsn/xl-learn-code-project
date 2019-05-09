@@ -37,3 +37,9 @@ font-size:28rpx;
   position:absolute;
   top:80rpx;
 }
+
+.xx{
+  width:30rpx;
+  height:30rpx;
+  margin:auto 0 auto 10rpx;
+}
