@@ -3,12 +3,12 @@
 <import src="movie-grid/movie-grid-template.wxml" />
 <view class="search">
 <icon class="search-img" type="search" size="13" color="#405f80"></icon>
-<input type="text" placeholder="后来的我们" placehoold-class="placeholder" bindfocus="onBindFocus" bindchange="onBindChange" />
+<input type="text" placeholder="后来的我们" placehoold-class="placeholder" bindfocus="onBindFocus" bindinput="onBindChange" />
 <image wx:if="{{searchResultShow}}" class="xx" src="/images/icon/xx.png" bindtap="onCancelTap"></image>
 </view>
 
 <view class="search-result" wx:if="{{searchResultShow}}">
-<template is="movieGridTemplate">
+<template is="movieGridTemplate" data="{{...searchResult}}">
 </template>
 </view>
 

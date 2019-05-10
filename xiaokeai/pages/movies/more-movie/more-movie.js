@@ -28,10 +28,10 @@ Page({
         var dataUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters";
       break;
       case "即将上映":
-        var dataUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters";
+        var dataUrl = app.globalData.g_doubanurl + "/v2/movie/coming_soon";
       break;
       case "Top250":
-        var dataUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters";
+        var dataUrl = app.globalData.g_doubanurl + "/v2/movie/top250";
       break;
     }
     this.setData({dataUrl:dataUrl});
@@ -98,6 +98,13 @@ Page({
     this.getDouBanData(nexturl);
     wx.showNavigationBarLoading();
   },
+  onbindMovieTap: function (event) {
+    var movieid = event.currentTarget.dataset.movieid;
+    console.log(movieid);
+    wx.navigateTo({
+      url: '/pages/movies/movie-detail/movie-detail?movieid=' + movieid,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -124,9 +131,11 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var refreshUrl = this.data.dataUrl+"?start=0&count=10";
-    this.setData({movies:[]});
+    console.log("ok")
+    var refreshUrl = this.data.dataUrl + "?start=0&count=10";
+    this.setData({ movies: [] });
     this.getDouBanData(refreshUrl);
+    this.setData({start:0});
     wx.showNavigationBarLoading();
   },
 
@@ -134,7 +143,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-     
+    var nexturl = this.data.dataUrl + "?start=" + this.data.start + "&count=10";
+    this.getDouBanData(nexturl);
+    wx.showNavigationBarLoading();
   },
 
   /**

@@ -15,9 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var inTheatersUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters" + "?start=0&count=3";;
-    var commingSoonUrl = app.globalData.g_doubanurl + "/v2/movie/coming_soon" + "?start=0&count=3";;
-    var top250Url = app.globalData.g_doubanurl + "/v2/movie/top250" + "?start=0&count=3";;
+    var inTheatersUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters" + "?start=0&count=3";
+    var commingSoonUrl = app.globalData.g_doubanurl + "/v2/movie/coming_soon" + "?start=0&count=3";
+    var top250Url = app.globalData.g_doubanurl + "/v2/movie/top250" + "?start=0&count=3";
     this.getDouBanData(inTheatersUrl,"inTheaters");
     this.getDouBanData(commingSoonUrl,"comingSoon");
     this.getDouBanData(top250Url,"top250");
@@ -63,6 +63,7 @@ Page({
     leibiemap["inTheaters"]="正在热映";
     leibiemap["comingSoon"]="即将上映";
     leibiemap["top250"]="Top250";
+    leibiemap["searchResult"]="搜索"
    var readyData={};
    readyData[key]={movies:arr,leibie:leibiemap[key]};
    this.setData(readyData);
@@ -70,7 +71,6 @@ Page({
 
   onMoreTap:function(event){
      var leibie=event.currentTarget.dataset.leibie;
-     console.log(leibie);
     wx.navigateTo({
       url: '/pages/movies/more-movie/more-movie?leibie='+leibie,
     })
@@ -85,14 +85,29 @@ Page({
   },
 
   onBindChange:function(event){
-    console.log(event);
+    var text=event.detail.value;
+    var searchUrl = app.globalData.g_doubanurl + "/v2/movie/search?q=" + text;
+    this.getDouBanData(searchUrl,"searchResult");
   },
 
   onCancelTap:function(){
     this.setData({
       containerShow: true,
-      searchResultShow: false
+      searchResultShow: false,
+      //searchResult:{}
     });
+  },
+  onScrollLower:function(event){
+    var nexturl = this.data.dataUrl + "?start=" + this.data.start + "&count=10";
+    this.getDouBanData(nexturl);
+    wx.showNavigationBarLoading();
+  },
+  onbindMovieTap:function(event){
+    var movieid = event.currentTarget.dataset.movieid;
+    console.log(movieid);
+    wx.navigateTo({
+      url: '/pages/movies/movie-detail/movie-detail?movieid=' + movieid,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
