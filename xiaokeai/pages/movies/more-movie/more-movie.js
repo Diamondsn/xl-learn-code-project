@@ -1,5 +1,5 @@
 // pages/movies/more-movie/more-movie.js
-var app=getApp();
+var app = getApp();
 var util = require("../../../utils/util.js");
 Page({
 
@@ -13,32 +13,38 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-     var leibie=options.leibie;
+  onLoad: function(options) {
+    var leibie = options.leibie;
 
-     this.setData({leibie:leibie});
-     //当前版本可以在这里进行设置导航栏标题
+    this.setData({
+      leibie: leibie
+    });
+    //当前版本可以在这里进行设置导航栏标题
     //  wx.setNavigationBarTitle({
     //    title: leibie
     //  })
 
-    var dataUrl="";
-    switch(leibie){
+    var dataUrl = "";
+    switch (leibie) {
       case "正在热映":
         var dataUrl = app.globalData.g_doubanurl + "/v2/movie/in_theaters";
-      break;
+        break;
       case "即将上映":
         var dataUrl = app.globalData.g_doubanurl + "/v2/movie/coming_soon";
-      break;
+        break;
       case "Top250":
         var dataUrl = app.globalData.g_doubanurl + "/v2/movie/top250";
-      break;
+        break;
     }
-    this.setData({dataUrl:dataUrl});
-    this.setData({start:0});
+    this.setData({
+      dataUrl: dataUrl
+    });
+    this.setData({
+      start: 0
+    });
     this.getDouBanData(dataUrl + "?start=0&count=10");
   },
-  getDouBanData: function (url) {
+  getDouBanData: function(url) {
     var that = this;
     wx.request({
       url: url,
@@ -46,19 +52,19 @@ Page({
       header: {
         "Content-Type": "json"
       },
-      success: function (res) {
+      success: function(res) {
         that.processDouBanData(res.data)
       },
-      fail: function () {
+      fail: function() {
         console.log("fail")
       },
-      complete: function () {
+      complete: function() {
 
       }
     })
   },
-  processDouBanData: function (DouBanData) {
-    var prevarr=this.data.movies||[];
+  processDouBanData: function(DouBanData) {
+    var prevarr = this.data.movies || [];
     var arr = [];
     for (var idx in DouBanData.subjects) {
       var subject = DouBanData.subjects[idx];
@@ -75,30 +81,34 @@ Page({
       }
       arr.push(temp);
     }
-    arr=prevarr.concat(arr);
-    var start=this.data.start;
-    start+=10;
-    var readyData= { movies: arr};
+    arr = prevarr.concat(arr);
+    var start = this.data.start;
+    start += 10;
+    var readyData = {
+      movies: arr
+    };
     this.setData(readyData);
-    this.setData({start:start});
+    this.setData({
+      start: start
+    });
     wx.hideNavigationBarLoading();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     wx.setNavigationBarTitle({
       title: this.data.leibie,
     })
   },
 
-  onScrollLower:function(event){
-    var nexturl = this.data.dataUrl+"?start="+this.data.start+"&count=10";
+  onScrollLower: function(event) {
+    var nexturl = this.data.dataUrl + "?start=" + this.data.start + "&count=10";
     this.getDouBanData(nexturl);
     wx.showNavigationBarLoading();
   },
-  onbindMovieTap: function (event) {
+  onbindMovieTap: function(event) {
     var movieid = event.currentTarget.dataset.movieid;
     console.log(movieid);
     wx.navigateTo({
@@ -109,40 +119,43 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    console.log("ok")
+  onPullDownRefresh: function() {
     var refreshUrl = this.data.dataUrl + "?start=0&count=10";
-    this.setData({ movies: [] });
+    this.setData({
+      movies: []
+    });
     this.getDouBanData(refreshUrl);
-    this.setData({start:0});
+    this.setData({
+      start: 0
+    });
     wx.showNavigationBarLoading();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var nexturl = this.data.dataUrl + "?start=" + this.data.start + "&count=10";
     this.getDouBanData(nexturl);
     wx.showNavigationBarLoading();
@@ -151,7 +164,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
