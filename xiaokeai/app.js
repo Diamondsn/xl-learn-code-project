@@ -2,7 +2,7 @@ App({
   globalData:{
     g_isPlayingMusic:false,
     g_currentPostId:null,
-    g_doubanurl: 'http://t.yushu.im'
+    g_doubanurl: 'https://douban.uieee.com'
 
   }
 })
