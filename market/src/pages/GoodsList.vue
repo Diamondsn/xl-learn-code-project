@@ -136,14 +136,29 @@ import "./../assets/css/product.css";
 import NavHeader from "./../components/NavHeader.vue";
 import NavFooter from "./../components/NavFooter.vue";
 import NavBread from "./../components/NavBread.vue";
+import axios from 'axios';
 export default {
   data() {
-    return {};
+    return {
+        goodsList:[]
+    };
   },
   components: {
     NavHeader,
     NavFooter,
     NavBread
+  },
+  mounted:function(){
+      this.getGoodsList();
+  },
+  methods:{
+      getGoodsList(){
+          axios.get('/api/goods.json').then((res)=>{
+              var data=res.data;
+              this.goodsList=data;
+              console.log(data);
+          })
+      }
   }
 };
 </script>
