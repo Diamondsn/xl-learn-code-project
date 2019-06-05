@@ -1,4 +1,3 @@
-/*nav*/
 .header {
   width: 100%;
   background-color: white;
@@ -68,7 +67,6 @@ a {
   height: 25px;
   transform: scaleX(-1);
 }
-/*login*/
 .regi_form_input{
   position: relative;
   height: 42px;
