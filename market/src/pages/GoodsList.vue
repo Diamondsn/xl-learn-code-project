@@ -19,6 +19,7 @@
           <a
             href="javascript:void(0)"
             class="filterby stopPop"
+            @click="showFilterPop"
           >Filter by</a>
         </div>
         <div class="accessory-result">
@@ -26,11 +27,12 @@
           <div
             class="filter stopPop"
             id="filter"
+            v-bind:class="{'filterby-show':filterby}"
           >
             <dl class="filter-price">
               <dt>Price:</dt>
-              <dd @clicck="priceChecked='all'"><a href="javascript:void(0)" v-bind:class="{'cur':priceChecked==='all'}">All</a></dd>
-              <dd v-for="(item,index) in priceFilter" v-key="index" @click="priceChecked=index">
+              <dd @click="priceChecked='all'"><a href="javascript:void(0)"  v-bind:class="{'cur':priceChecked==='all'}" >All</a></dd>
+              <dd v-for="(item,index) in priceFilter" :key="index" @click="setPriceFilter(index)">
                 <a href="javascript:void(0)" v-bind:class="{'cur':priceChecked===index}">{{item.startPrice}} - {{item.endPrice}}</a>
               </dd>
             </dl>
@@ -40,10 +42,10 @@
           <div class="accessory-list-wrap">
             <div class="accessory-list col-4">
               <ul>
-                <li v-for="(item,index) in goodsList" v-key="index">
+                <li v-for="(item,index) in goodsList" :key="index">
                   <div class="pic">
                     <a href="#"><img
-                        v-bind:src="'/static/'+item.prodcutImg"
+                        v-lazy="'/static/'+item.prodcutImg"
                         alt=""
                       ></a>
                   </div>
@@ -64,6 +66,7 @@
         </div>
       </div>
     </div>
+    <div class="md-overlay" v-show="overLayFlag" @click.stop="closePop"></div>
     <nav-footer></nav-footer>
   </div>
 </template>
@@ -92,7 +95,9 @@ export default {
             endPrice:'2000.00'
           }
         ],
-        priceChecked:'all'
+        priceChecked:'all',
+        filterby:false,
+        overLayFlag:false
     };
   },
   components: {
@@ -110,6 +115,22 @@ export default {
               this.goodsList=data.result;
               console.log(data);
           })
+      },
+      handleClick:function(){
+        this.priceChecked='all';
+        console.log(this.priceChecked);
+      },
+      showFilterPop(){
+         this.filterby=true;
+         this.overLayFlag=true;
+      },
+      closePop(){
+        this.filterby=false;
+         this.overLayFlag=false;
+      },
+      setPriceFilter(index){
+        this.priceChecked=index;
+        this.closePop();
       }
   }
 };
