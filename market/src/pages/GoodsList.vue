@@ -29,18 +29,9 @@
           >
             <dl class="filter-price">
               <dt>Price:</dt>
-              <dd><a href="javascript:void(0)">All</a></dd>
-              <dd>
-                <a href="javascript:void(0)">0 - 100</a>
-              </dd>
-              <dd>
-                <a href="javascript:void(0)">100 - 500</a>
-              </dd>
-              <dd>
-                <a href="javascript:void(0)">500 - 1000</a>
-              </dd>
-              <dd>
-                <a href="javascript:void(0)">1000 - 2000</a>
+              <dd @clicck="priceChecked='all'"><a href="javascript:void(0)" v-bind:class="{'cur':priceChecked==='all'}">All</a></dd>
+              <dd v-for="(item,index) in priceFilter" v-key="index" @click="priceChecked=index">
+                <a href="javascript:void(0)" v-bind:class="{'cur':priceChecked===index}">{{item.startPrice}} - {{item.endPrice}}</a>
               </dd>
             </dl>
           </div>
@@ -86,7 +77,22 @@ import axios from 'axios';
 export default {
   data() {
     return {
-        goodsList:[]
+        goodsList:[],
+        priceFilter:[
+          {
+            startPrice:'0.00',
+            endPrice:'500.00'
+          },
+          {
+            startPrice:'500.00',
+            endPrice:'1000.00'
+          },
+          {
+            startPrice:'1000.00',
+            endPrice:'2000.00'
+          }
+        ],
+        priceChecked:'all'
     };
   },
   components: {
