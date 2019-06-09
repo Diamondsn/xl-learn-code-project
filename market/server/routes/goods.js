@@ -66,9 +66,47 @@ router.get('/', function (req, res, next) {
           list: doc
         }
       })
-      console.log(doc)
     }
   })
 });
+
+//加入购物车
+router.post('/addCart',function(req, res, next){
+   var userId='100000077';
+   var productId=req.body.productId;
+   var User=require('../models/user');
+   
+   User.findOne({userId:userId},function(err,userdoc){
+   if(err){
+     res.json({
+       status:'1',
+       msg:err.message
+     })
+   }else{
+     console.log("userDoc:"+userdoc)
+     if(userdoc){
+       Goods.findOne({productId:productId},function(err1,doc){
+        doc.productNum=1;
+          doc.checked=1;
+          userdoc.cartList.push(doc);
+          userdoc.save(function(err2,doc2){
+            if(err2){
+              res.json({
+                status:"1",
+                msg:err2.message
+              })
+              }else{
+                res.json({
+                  status:'0',
+                  msg:'',
+                  result:'suc'
+                })
+              }
+            })
+          })
+       }
+    }
+   })
+   })
 
 module.exports = router;

@@ -60,13 +60,15 @@
                       <a
                         href="javascript:;"
                         class="btn btn--m"
+                        @click="addCart(item.productId)"
                       >加入购物车</a>
                     </div>
                   </div>
                 </li>
               </ul>
             </div>
-            <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">加载中...
+            <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+              <img v-if="loading" src="../assets/loading-spinning-bubbles.svg">
 </div>
           </div>
         </div>
@@ -107,7 +109,8 @@ export default {
         sortFlag:false,
         page:1,
         pageSize:8,
-        busy:true
+        busy:true,
+        loading:false
     };
   },
   components: {
@@ -126,9 +129,10 @@ export default {
           sort:this.sortFlag?1:-1,
           level:this.priceChecked
         };
+        this.loading=true;
           axios.get('/goods',{params:params}).then((res)=>{
               var data=res.data;
-
+              this.loading=false
               if(data.status==="0"){
                 if(flag){
                 this.goodsList=this.goodsList.concat(data.result.list);
@@ -145,6 +149,7 @@ export default {
                 this.goodsList=[];
               }
           })
+          
       },
       handleClick:function(){
         this.priceChecked='all';
@@ -175,6 +180,17 @@ export default {
         this.page++;
         this.getGoodsList(true);
       }, 1000);
+      },
+      addCart(productId){
+         axios.post("/goods/addCart",{
+           productId:productId
+         }).then((res)=>{
+           if(res.data.status=='0'){
+             alert("success");
+           }else{
+             alert("msg"+res.msg);
+           }
+         })
       }
   }
 };
