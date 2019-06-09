@@ -66,6 +66,8 @@
                 </li>
               </ul>
             </div>
+            <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">加载中...
+</div>
           </div>
         </div>
       </div>
@@ -104,7 +106,8 @@ export default {
         overLayFlag:false,
         sortFlag:false,
         page:1,
-        pageSize:8
+        pageSize:8,
+        busy:true
     };
   },
   components: {
@@ -116,16 +119,31 @@ export default {
       this.getGoodsList();
   },
   methods:{
-      getGoodsList(){
+      getGoodsList(flag){
         var params={
           page:this.page,
           pageSize:this.pageSize,
-          sort:this.sortFlag?1:-1
+          sort:this.sortFlag?1:-1,
+          level:this.priceChecked
         };
           axios.get('/goods',{params:params}).then((res)=>{
               var data=res.data;
-              this.goodsList=data.result.list;
-              console.log(data.result.list);
+
+              if(data.status==="0"){
+                if(flag){
+                this.goodsList=this.goodsList.concat(data.result.list);
+                if(data.result.count==0){
+                  this.busy=true;
+                }else{
+                  this.busy=false;
+                }
+                }else{
+                  this.goodsList=data.result.list;
+                  this.busy=false;
+                }
+              }else{
+                this.goodsList=[];
+              }
           })
       },
       handleClick:function(){
@@ -142,12 +160,21 @@ export default {
       },
       setPriceFilter(index){
         this.priceChecked=index;
+        this.getGoodsList(false);
         this.closePop();
       },
       sortGoods:function(){
         this.sortFlag=!this.sortFlag;
         this.page=1;
-        this.getGoodsList();
+        this.getGoodsList(false);
+      },
+      loadMore:function(){
+        this.busy = true;
+        
+      setTimeout(() => {
+        this.page++;
+        this.getGoodsList(true);
+      }, 1000);
       }
   }
 };

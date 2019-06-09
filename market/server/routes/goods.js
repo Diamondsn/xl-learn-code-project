@@ -25,8 +25,29 @@ router.get('/', function (req, res, next) {
   var page=req.param("page");
   var pageSize=parseInt(req.param("pageSize"));
   var sort=req.param("sort");
+  var level=req.param("level");
+
   var skip=(page-1)*pageSize;
+  let startprice='';
+  let endPrice='';
   var params = {};
+  if(level!="all"){
+ switch(level){
+   case '0':startprice='0';endPrice='500';break;
+   case '1':startprice='500';endPrice='1000';break;
+   case '2':startprice='1000';endPrice='2000';break;
+   default:startprice='0',endPrice='2000';
+ }
+ console.log(startprice);
+ console.log(endPrice);
+    params = {
+      salePrice: {
+        $gt: startprice,
+        $lte: endPrice
+      }
+    }
+  }
+
   let goodsModel=Goods.find(params).skip(skip).limit(pageSize);
   goodsModel.sort({'salePrice':sort});
 
@@ -45,6 +66,7 @@ router.get('/', function (req, res, next) {
           list: doc
         }
       })
+      console.log(doc)
     }
   })
 });
