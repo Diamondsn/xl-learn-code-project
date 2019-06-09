@@ -2,7 +2,7 @@ var mongoose=require("mongoose")
 var Schema=mongoose.Schema;
 
 var productSchema=new Schema({
-    "productId":Nnumber,
+    "productId":Number,
     "productName":String,
     "salePrice":Number,
     "productImage":String
