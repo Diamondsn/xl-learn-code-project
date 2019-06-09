@@ -45,13 +45,13 @@
                 <li v-for="(item,index) in goodsList" :key="index">
                   <div class="pic">
                     <a href="#"><img
-                        v-lazy="'/static/'+item.prodcutImg"
+                        v-lazy="'/static/'+item.productImage"
                         alt=""
                       ></a>
                   </div>
                   <div class="main">
                     <div class="name">{{item.productName}}</div>
-                    <div class="price">{{item.prodcutPrice}}</div>
+                    <div class="price">{{item.salePrice}}</div>
                     <div class="btn-area">
                       <a
                         href="javascript:;"
@@ -110,10 +110,10 @@ export default {
   },
   methods:{
       getGoodsList(){
-          axios.get('/api/goods.json').then((res)=>{
+          axios.get('/goods').then((res)=>{
               var data=res.data;
-              this.goodsList=data.result;
-              console.log(data);
+              this.goodsList=data.result.list;
+              console.log(data.result.list);
           })
       },
       handleClick:function(){
