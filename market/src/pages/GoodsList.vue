@@ -8,11 +8,15 @@
           <span class="sortby">Sort by:</span>
           <a
             href="javascript:void(0)"
-            class="default cur"
+            class="default"
+            v-bind:class="{'cur':!sortFlag}"
+            @click="sortGoods"
           >Default</a>
           <a
             href="javascript:void(0)"
             class="price"
+            v-bind:class="{'cur':sortFlag}"
+             @click="sortGoods"
           >Price <svg class="icon icon-arrow-short">
               <use xlink:href="#icon-arrow-short"></use>
             </svg></a>
@@ -97,7 +101,10 @@ export default {
         ],
         priceChecked:'all',
         filterby:false,
-        overLayFlag:false
+        overLayFlag:false,
+        sortFlag:false,
+        page:1,
+        pageSize:8
     };
   },
   components: {
@@ -110,7 +117,12 @@ export default {
   },
   methods:{
       getGoodsList(){
-          axios.get('/goods').then((res)=>{
+        var params={
+          page:this.page,
+          pageSize:this.pageSize,
+          sort:this.sortFlag?1:-1
+        };
+          axios.get('/goods',{params:params}).then((res)=>{
               var data=res.data;
               this.goodsList=data.result.list;
               console.log(data.result.list);
@@ -131,6 +143,11 @@ export default {
       setPriceFilter(index){
         this.priceChecked=index;
         this.closePop();
+      },
+      sortGoods:function(){
+        this.sortFlag=!this.sortFlag;
+        this.page=1;
+        this.getGoodsList();
       }
   }
 };
